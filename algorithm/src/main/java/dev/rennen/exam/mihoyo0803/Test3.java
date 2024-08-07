@@ -44,28 +44,20 @@ public class Test3 {
                     return;
                 }
                 deletable.add(i);
-                count++;
             }
         }
         boolean solvable = false;
         while (!deletable.isEmpty()) {
-            if (deletable.size() == 1 && deletable.get(0) == x) {
+            int t = deletable.removeFirst();
+            count++;
+            if (t == x) {
                 solvable = true;
-                break;
+                continue;
             }
-            for (int i = deletable.size() - 1; i >= 0; i--) {
-                int t = deletable.get(i);
-                // 删除除了 x 之外其他所有能删除的节点
-                if (t != x) {
-                    deletable.remove(i);
-                    for (int minus : graph.get(t)) {
-                        indegree[minus]--;
-                        if (indegree[minus] == 1) {
-                            deletable.add(minus);
-                            count++;
-                        }
-                    }
-                    indegree[t]--;
+            for (int i : graph.get(t)) {
+                indegree[i]--;
+                if (indegree[i] == 1) {
+                    deletable.add(i);
                 }
             }
         }
