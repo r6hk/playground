@@ -1,4 +1,4 @@
-package dev.rennen.juc.abcPrinter;
+package dev.rennen.juc.application.abcPrinter;
 
 import java.util.concurrent.Semaphore;
 
