@@ -49,6 +49,7 @@ public class ReentrantLockAbcPrinter extends ReentrantLock {
         awaitSignal.lock();
         try {
             System.out.println("开始...");
+            // 通常调用该方法时必须持有和 Condition 相关联的锁
             a.signal();
         } finally {
             awaitSignal.unlock();
