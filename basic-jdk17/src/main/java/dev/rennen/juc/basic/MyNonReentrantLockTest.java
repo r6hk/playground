@@ -31,7 +31,7 @@ public class MyNonReentrantLockTest implements Lock {
                 //获取锁操作，是需要把state更新为1，所以arg必须是1
                 throw new RuntimeException("arg not is 1");
             }
-            if (compareAndSetState(0, arg)) {//cas 更新state为1成功，代表获取锁成功
+            if (compareAndSetState(0, arg)) { // cas 更新state为1成功，代表获取锁成功
                 //设置持有锁线程
                 setExclusiveOwnerThread(Thread.currentThread());
                 return true;
@@ -119,21 +119,29 @@ public class MyNonReentrantLockTest implements Lock {
         return sync.createConditionObject();
     }
 
+    static int j = 0;
+
     public static void main(String[] args) throws InterruptedException {
-        MyNonReentrantLockTest testLock = new MyNonReentrantLockTest();
-        Runnable r = () -> {
-            for (int i = 0; i < 10; i++) {
-                if (i == 5) {
-                    testLock.tryLock();
-                }
-                System.out.println("Thread Print:" + i);
+        MyNonReentrantLockTest nonReentrantLock = new MyNonReentrantLockTest();
+        Runnable runnable = () -> {
+            //获取锁
+            nonReentrantLock.lock();
+            for (int i = 0; i < 100000; i++) {
+                j++;
             }
-            testLock.unlock();
+            //释放锁
+            nonReentrantLock.unlock();
         };
-        Thread t = new Thread(r);
-        Thread t2 = new Thread(r);
-        t.start();
-        Thread.sleep(3000);
-        testLock.unlock();
+
+        Thread thread = new Thread(runnable);
+        Thread threadTwo = new Thread(runnable);
+
+        thread.start();
+        threadTwo.start();
+
+        thread.join();
+        threadTwo.join();
+
+        System.out.println(j);
     }
 }
