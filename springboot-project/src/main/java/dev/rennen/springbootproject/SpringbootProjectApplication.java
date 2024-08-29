@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringbootProjectApplication {
 
-    @Autowired
-    private Test test;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootProjectApplication.class, args);
