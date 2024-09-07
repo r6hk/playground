@@ -1,6 +1,7 @@
 package dev.rennen;
 
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author rennen.dev
@@ -10,16 +11,9 @@ import java.util.concurrent.locks.ReentrantLock;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-
-        ReentrantLock lock = new ReentrantLock();
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Set<Integer> set = new HashSet<>();
+        set.add(1);
+        set.add(1);
+        System.out.println(set.size());
     }
 }

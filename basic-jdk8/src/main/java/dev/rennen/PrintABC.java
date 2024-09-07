@@ -6,18 +6,4 @@ package dev.rennen;
  */
 public class PrintABC {
 
-    public static void main(String[] args) {
-
-    }
-
-    static class MyThread extends Thread {
-
-
-        @Override
-        public void run() {
-
-        }
-
-        private void
-    }
 }
