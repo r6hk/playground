@@ -10,12 +10,16 @@ import java.util.Set;
  */
 public class ThreadLocalTest {
 
-    private static ThreadLocal<Integer> integerThreadLocal;
+    private static ThreadLocal<Integer> integerThreadLocal = new ThreadLocal<>();
 
     public static void main(String[] args) {
-        WeakReference<Integer> t = new WeakReference<>(1);
-        Set<Integer> integers = new HashSet<>();
-        integers.add(1);
-        integers.contains(1);
+        integerThreadLocal.set(1);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(integerThreadLocal.get());
+            }
+        });
+        t.start();
     }
 }
