@@ -41,7 +41,7 @@ public class HandWriteHashMap<K, V> {
     @SuppressWarnings("unchecked")
     public HandWriteHashMap() {
         this.size = 0;
-        this.buckets = new Node[DEFAULT_CAPACITY];
+        this.buckets = (Node<K,V>[]) new Node[DEFAULT_CAPACITY];
     }
 
     /**
@@ -50,7 +50,7 @@ public class HandWriteHashMap<K, V> {
     @SuppressWarnings("unchecked")
     public HandWriteHashMap(int capacity) {
         this.size = 0;
-        this.buckets = new Node[capacity];
+        this.buckets = (Node<K,V>[]) new Node[capacity];
     }
 
     public V get(K key) {
