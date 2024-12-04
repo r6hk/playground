@@ -69,14 +69,14 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>5.3.18</version> <!-- 根据需要选择合适的版本 -->
+            <version>6.2.0</version> <!-- 根据需要选择合适的版本 -->
         </dependency>
 
         <!-- Spring Context -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.3.18</version>
+            <version>6.1.14</version>
         </dependency>
 
         <!-- Spring AOP -->
