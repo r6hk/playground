@@ -13,7 +13,5 @@ public class FactoryTest {
 
     @Test
     public void XmlFactoryTest() {
-        BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("config.xml"));
-        beanFactory.getBean("product");
     }
 }

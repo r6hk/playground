@@ -104,3 +104,4 @@ fabric.properties
 */target/
 /.fastRequest/
 /.idea/
+/.xcodemap/
