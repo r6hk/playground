@@ -17,13 +17,12 @@ public class ExceptionTest {
             System.out.println(num);
         }
 
-        // test();
     }
 
-    private static void test() {
+    private static void test() throws IOException{
         try {
             System.out.println("try");
-            throw new IOException();
+            throw new Error();
         } catch (Exception e) {
             System.out.println("catch");
         } finally {
