@@ -1,9 +1,6 @@
 package dev.rennen.leetcode;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author rennen.dev
@@ -24,41 +21,58 @@ public class Test127 {
         System.out.println(ladderLength(beginWord, endWord, wordList));
     }
 
+    static Map<String, Integer> index = new HashMap<>();
+    static int count = 0;
+    static List<List<Integer>> graph = new ArrayList<>();
+
     public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        LinkedList<Pair> queue = new LinkedList<>();
-        Set<String> visited = new HashSet<>();
-        queue.add(new Pair(beginWord, 1));
+        addEdges(beginWord);
+        for (String t : wordList) {
+            addEdges(t);
+        }
+        if (!index.containsKey(endWord)) {
+            return 0;
+        }
+        int begin = index.get(beginWord);
+        int end = index.get(endWord);
+        LinkedList<Integer> queue = new LinkedList<>();
+        queue.addLast(begin);
+        int[] dis = new int[count];
+        Arrays.fill(dis, Integer.MAX_VALUE);
+        dis[0] = 0;
         while (!queue.isEmpty()) {
-            Pair t = queue.removeFirst();
-            if (t.word.equals(endWord)) return t.layer;
-            for (String s : wordList) {
-                if (!visited.contains(s) && compare(t.word, s)) {
-                    queue.add(new Pair(s, t.layer + 1));
-                    visited.add(s);
-                }
+            int t = queue.removeFirst();
+            if (t == end) return dis[t] / 2 + 1;
+            List<Integer> tmp = graph.get(t);
+            for (int i : tmp) {
+                if (dis[i] != Integer.MAX_VALUE) continue;
+                queue.add(i);
+                dis[i] = dis[t] + 1;
             }
         }
         return 0;
     }
 
-    private static boolean compare(String a, String b) {
-        char[] ac = a.toCharArray();
-        char[] bc = b.toCharArray();
-        int count = 0;
-        for (int i = 0; i < ac.length; i++) {
-            if (ac[i] != bc[i]) count++;
-            if (count > 1) return false;
+    private static void addEdges(String word) {
+        addWord(word);
+        int m = index.get(word);
+        char[] c = word.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            char t = c[i];
+            c[i] = '*';
+            String newWord = new String(c);
+            addWord(newWord);
+            int n = index.get(newWord);
+            graph.get(m).add(n);
+            graph.get(n).add(m);
+            c[i] = t;
         }
-        return count == 1;
     }
 
-    private static class Pair {
-        String word;
-        int layer;
-
-        public Pair(String word, int layer) {
-            this.word = word;
-            this.layer = layer;
+    private static void addWord(String word) {
+        if (!index.containsKey(word)) {
+            index.put(word, count++);
+            graph.add(new ArrayList<>());
         }
     }
 }
