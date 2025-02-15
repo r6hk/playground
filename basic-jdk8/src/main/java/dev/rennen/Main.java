@@ -1,7 +1,6 @@
 package dev.rennen;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author rennen.dev
@@ -11,9 +10,7 @@ import java.util.Set;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Set<Integer> set = new HashSet<>();
-        set.add(1);
-        set.add(1);
-        System.out.println(set.size());
+        ReentrantLock lock = new ReentrantLock();
+        lock.lock();
     }
 }
