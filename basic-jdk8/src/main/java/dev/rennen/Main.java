@@ -1,6 +1,10 @@
 package dev.rennen;
 
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @author rennen.dev
@@ -10,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        ReentrantLock lock = new ReentrantLock();
-        lock.lock();
+        Integer i = Integer.valueOf("1");
+        CountDownLatch latch = new CountDownLatch(5);
     }
 }
