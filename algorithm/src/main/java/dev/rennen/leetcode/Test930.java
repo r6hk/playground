@@ -25,7 +25,6 @@ public class Test930 {
             }
             res += l;
         }
-        var list = List.of()
         return res;
     }
 
