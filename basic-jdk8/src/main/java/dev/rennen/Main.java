@@ -14,7 +14,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Integer i = Integer.valueOf("1");
-        CountDownLatch latch = new CountDownLatch(5);
+        for (int i = 1; i < 0; i++) {
+            System.out.println(1);
+        }
     }
 }
