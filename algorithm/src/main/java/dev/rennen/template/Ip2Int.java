@@ -1,4 +1,4 @@
-package dev.rennen.leetcode;
+package dev.rennen.template;
 
 /**
  * @author rennen.dev

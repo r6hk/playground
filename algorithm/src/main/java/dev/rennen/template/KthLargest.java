@@ -1,4 +1,4 @@
-package dev.rennen;
+package dev.rennen.template;
 
 public class KthLargest {
 

@@ -1,4 +1,4 @@
-package dev.rennen.leetcode;
+package dev.rennen.template;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
