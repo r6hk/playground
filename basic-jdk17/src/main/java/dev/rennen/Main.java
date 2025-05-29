@@ -1,6 +1,8 @@
 package dev.rennen;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,5 +24,8 @@ public class Main {
         map.put(1, null);
         System.out.println(map.get(1));
         System.out.println(map.containsKey(1));
+
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        list.add(1);
     }
 }
