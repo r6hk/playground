@@ -7,21 +7,18 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
-
 /**
  * <br/>
  * 2025/8/9
  *
  * @author rennen.dev
  */
-public interface PeopleRepository extends MongoRepository<People, String> {
-    List<People> findByLastName(String lastName);
+public interface PeopleRepository extends MongoRepository<People, String>, CustomPeopleRepository {
 }
 
 interface CustomPeopleRepository {
-    
-    List<People> findByFirstName(String lastName);
+
+    People findByFirstName(String firstName);
 }
 
 @RequiredArgsConstructor
@@ -30,8 +27,8 @@ class CustomPeopleRepositoryImpl implements CustomPeopleRepository {
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public List<People> findByFirstName(String firstName) {
-        return mongoTemplate.find(new Query(Criteria.where("firstName").is(firstName)), People.class);
+    public People findByFirstName(String firstName) {
+        return mongoTemplate.findOne(new Query(Criteria.where("firstName").is(firstName)), People.class);
     }
 
 }
