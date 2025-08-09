@@ -1,0 +1,37 @@
+package dev.rennen.springdatamongo.repository;
+
+import dev.rennen.springdatamongo.entity.People;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.List;
+
+/**
+ * <br/>
+ * 2025/8/9
+ *
+ * @author rennen.dev
+ */
+public interface PeopleRepository extends MongoRepository<People, String> {
+    List<People> findByLastName(String lastName);
+}
+
+interface CustomPeopleRepository {
+    
+    List<People> findByFirstName(String lastName);
+}
+
+@RequiredArgsConstructor
+class CustomPeopleRepositoryImpl implements CustomPeopleRepository {
+
+    private final MongoTemplate mongoTemplate;
+
+    @Override
+    public List<People> findByFirstName(String firstName) {
+        return mongoTemplate.find(new Query(Criteria.where("firstName").is(firstName)), People.class);
+    }
+
+}
