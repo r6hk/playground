@@ -18,9 +18,4 @@ public class HelloController {
 
     private final PeopleRepository peopleRepository;
 
-    @GetMapping("/hello")
-    public People hello() {
-        peopleRepository.insert(new People("Walter", "White"));
-        return peopleRepository.findByFirstName("Walter");
-    }
 }

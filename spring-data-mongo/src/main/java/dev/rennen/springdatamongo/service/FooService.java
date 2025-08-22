@@ -4,10 +4,11 @@ import dev.rennen.springdatamongo.entity.People;
 import dev.rennen.springdatamongo.repository.PeopleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.domain.OffsetScrollPosition;
+import org.springframework.data.domain.ScrollPosition;
+import org.springframework.data.domain.Window;
 import org.springframework.stereotype.Service;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * <br/>
@@ -18,14 +19,28 @@ import java.util.concurrent.TimeUnit;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class FooService {
+public class FooService implements CommandLineRunner {
 
     private final PeopleRepository peopleRepository;
 
-    @Scheduled(fixedRate = 1, timeUnit = TimeUnit.SECONDS)
-    public void test() {
-        log.info("insert");
-        peopleRepository.insert(new People("1", "@"));
+
+    @Override
+    public void run(String... args) {
+        for (int i = 0; i < 10; i++) {
+            peopleRepository.save(new People(i, "@"));
+        }
+        ScrollPosition position = ScrollPosition.offset();
+        Window<People> peoples;
+        do {
+            peoples = peopleRepository.findFirst10ByName(null, null);
+            if (peoples.isEmpty()) break;
+            for (var people : peoples) {
+                System.out.println("people = " + people);
+            }
+            peoples.positionAt(peoples.size() - 1);
+            log.info("next!");
+        } while (!peoples.isEmpty() && peoples.hasNext());
+        log.info("end!");
     }
 
 }

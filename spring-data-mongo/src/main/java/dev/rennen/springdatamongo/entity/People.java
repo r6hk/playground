@@ -9,5 +9,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author rennen.dev
  */
 @Document
-public record People(String firstName, String lastName) {
+public record People(int index, String name) {
 }

@@ -2,10 +2,12 @@ package dev.rennen.springdatamongo.repository;
 
 import dev.rennen.springdatamongo.entity.People;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.ScrollPosition;
+import org.springframework.data.domain.Window;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 /**
  * <br/>
@@ -14,11 +16,17 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @author rennen.dev
  */
 public interface PeopleRepository extends MongoRepository<People, String>, CustomPeopleRepository {
+
+    Window<People> findFirst10ByName(String name, ScrollPosition position);
+
+
 }
 
 interface CustomPeopleRepository {
 
-    People findByFirstName(String firstName);
+    @Nullable
+    People findOneByName(String name);
+
 }
 
 @RequiredArgsConstructor
@@ -27,8 +35,8 @@ class CustomPeopleRepositoryImpl implements CustomPeopleRepository {
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public People findByFirstName(String firstName) {
-        return mongoTemplate.findOne(new Query(Criteria.where("firstName").is(firstName)), People.class);
+    public People findOneByName(String name) {
+        return null;
     }
 
 }
