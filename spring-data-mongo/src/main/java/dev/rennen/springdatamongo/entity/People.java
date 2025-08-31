@@ -8,6 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author rennen.dev
  */
-@Document
+@Document()
 public record People(int index, String name) {
 }

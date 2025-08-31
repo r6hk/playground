@@ -105,3 +105,4 @@ fabric.properties
 /.fastRequest/
 /.idea/
 /.xcodemap/
+/.env
