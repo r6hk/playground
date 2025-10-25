@@ -1,0 +1,14 @@
+{
+"type:":"现象",
+"诊断初步报告":"url",
+"check":[
+{
+"node":"ip",
+"是否已处理":true,
+"check":[{
+"type":"",
+"result":false,
+"remark":""
+}]
+}
+]}

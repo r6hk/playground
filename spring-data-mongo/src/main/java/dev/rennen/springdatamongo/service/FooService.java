@@ -26,20 +26,15 @@ public class FooService implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        for (int i = 0; i < 10; i++) {
-            peopleRepository.save(new People(i, "@"));
-        }
-        ScrollPosition position = ScrollPosition.offset();
-        Window<People> peoples;
-        do {
+        Window<People> peoples = peopleRepository.findFirst10ByName("@", ScrollPosition.offset());
+        if (!peoples.isEmpty()) do {
             peoples = peopleRepository.findFirst10ByName(null, null);
             if (peoples.isEmpty()) break;
             for (var people : peoples) {
                 System.out.println("people = " + people);
             }
-            peoples.positionAt(peoples.size() - 1);
-            log.info("next!");
-        } while (!peoples.isEmpty() && peoples.hasNext());
+            peoples = peopleRepository.findFirst10ByName("@")
+        } while (!peoples.isEmpty() || peoples.hasNext());
         log.info("end!");
     }
 
