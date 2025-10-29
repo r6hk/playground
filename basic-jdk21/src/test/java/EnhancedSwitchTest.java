@@ -28,7 +28,8 @@ public class EnhancedSwitchTest {
 
     private static void enumSwitch2(ABCD abcd) {
         // switch 表达式，有返回值，要求不能有遗漏的分支
-        // 匹配枚举可以穷尽所有分支，匹配 integer 或者 string 不能穷尽所有分支，只能使用 default
+        // 匹配枚举类型可以穷尽所有分支
+        // 匹配 integer 或者 string 不能穷尽所有分支，只能使用 default
         int res = switch (abcd) {
             case A, B -> 1;
             case C -> {
@@ -41,7 +42,20 @@ public class EnhancedSwitchTest {
         }; // 最后有分号
     }
 
-    private static String switchPatternMatching(SealedInterface foo) {
+    static String describe(Object obj) {
+        return switch (obj) {
+            case String s when s.isEmpty()      -> "空字符串";
+            case String s when s.length() > 10  -> "长字符串";
+            case String s                       -> "普通字符串";
+            case Integer i when i < 0           -> "负整数";
+            case Integer i                      -> "非负整数";
+            case null                           -> "null";
+            default                             -> "其他类型";
+        };
+    }
+
+
+    private static void switchPatternMatching(SealedInterface foo) {
         // sealed class 和 switch 模式匹配一起使用，要求不能有遗漏的分支
         switch (foo) {
             case SealedImplAA aa ->
@@ -50,7 +64,5 @@ public class EnhancedSwitchTest {
                     System.out.println(2);
             case SealedImplB sealedImplB -> System.out.println(3);
         }
-        return "error";
     }
-
 }

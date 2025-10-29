@@ -23,6 +23,10 @@ public record Person(
         this(name, 0);
     }
 
+    public Person(int a, String b) {
+
+    }
+
     // 自动生成 toString, equals, hashcode 方法
 }
 
